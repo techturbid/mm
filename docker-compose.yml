@@ -1,0 +1,33 @@
+version: "3"
+services:
+  mongodb:
+    image: tutum/mongodb
+    environment:
+      - AUTH=no
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    networks:
+      - techturbid-bridge
+  api:
+    build: ./src/api
+    ports:
+      - "8123:8123"
+      - "8080:8080"
+    expose:
+      - "8123"
+      - "8080"
+  consumer:
+    build: ./src/consumer
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+    depends_on:
+      - mongodb
+    networks:
+      - techturbid-bridge
+networks:
+    techturbid-bridge:
+        driver: bridge
