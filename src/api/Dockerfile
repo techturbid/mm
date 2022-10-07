@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:1
 ENV GOPATH /go
 COPY main.go /go
 WORKDIR /go
